@@ -6,6 +6,7 @@ const router = express.Router()
 
 // for product purpose only
 router.post("/products", ProductController.createProduct)
+router.get("/products", ProductController.getAllProducts)
 
 // for order purpose only
 router.post("/orders" ,ProductController.createOrder)

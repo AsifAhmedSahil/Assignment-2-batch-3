@@ -6,6 +6,10 @@ const createProduct = async(payLoad: TProducts) =>{
     const result = await Product.create(payLoad);
     return result
 }
+const getAllProducts = async() =>{
+    const result = await Product.find();
+    return result
+}
 
 // for order purpose only
 const createOrder = async(payLoad: TOrders) =>{
@@ -15,5 +19,6 @@ const createOrder = async(payLoad: TOrders) =>{
 
 export const ProductServices ={
     createProduct,
+    getAllProducts,
     createOrder
 }
