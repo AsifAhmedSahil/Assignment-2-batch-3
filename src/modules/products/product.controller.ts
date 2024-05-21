@@ -14,16 +14,16 @@ const getAllProducts = async (req: Request, res: Response) => {
     let result;
     const { searchTerm } = req.query;
     if (searchTerm) {
-        
-        result = await ProductServices.getProductBySearch(searchTerm );
+      result = await ProductServices.getProductBySearch(searchTerm);
     } else {
-        // Fetch all products if searchTerm parameter doesn't exist
-        result = await ProductServices.getAllProducts();
+      result = await ProductServices.getAllProducts();
     }
-     
+
     res.json({
       success: true,
-      message: "All Products Retrive successfully",
+      message: searchTerm
+        ? `Products matching search term ${searchTerm} fetched successfully!`
+        : "All Products Retrieved Successfully",
       data: result,
     });
   } catch (error) {
@@ -125,7 +125,7 @@ const getAllOrders = async (req: Request, res: Response) => {
   } catch (error) {
     res.json({
       success: false,
-      
+
       message: "oops , there are no orders",
       error: error,
     });
