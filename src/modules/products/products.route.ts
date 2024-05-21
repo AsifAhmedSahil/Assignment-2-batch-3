@@ -10,5 +10,6 @@ router.get("/products", ProductController.getAllProducts)
 
 // for order purpose only
 router.post("/orders" ,ProductController.createOrder)
+router.get("/orders" ,ProductController.getAllOrders)
 
 export const ProductRoutes = router;

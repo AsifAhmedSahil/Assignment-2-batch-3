@@ -35,9 +35,26 @@ const createOrder = async (req: Request, res: Response) => {
     data: result,
   });
 };
+const getAllOrders = async (req: Request, res: Response) => {
+    try {
+      const result = await ProductServices.getAllOrders();
+      res.json({
+        success: true,
+        message: "All Orders Retrive successfully",
+        data: result,
+      });
+    } catch (error) {
+      res.json({
+        success: true,
+        message: "Orders is not retrive successfully",
+        error: error,
+      });
+    }
+  };
 
 export const ProductController = {
   createProduct,
   getAllProducts,
   createOrder,
+  getAllOrders
 };
