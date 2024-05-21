@@ -46,6 +46,25 @@ const getProductById = async (req: Request, res: Response) => {
   }
 };
 
+const updateById = async (req: Request, res: Response) => {
+  try {
+    const {productId} = req.params
+    const updatedProductData =req.body
+    const result = await ProductServices.updateById(productId,updatedProductData);
+    res.json({
+      success: true,
+      message: " Products updated successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: "Product is not updated successfully",
+      error: error,
+    });
+  }
+};
+
 const deletedById = async (req: Request, res: Response) => {
   try {
     const {productId} = req.params
@@ -103,6 +122,7 @@ export const ProductController = {
   getAllProducts,
   getProductById,
   deletedById,
+  updateById,
   createOrder,
   getAllOrders
 };

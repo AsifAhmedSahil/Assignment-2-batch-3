@@ -14,6 +14,10 @@ const getProductById = async(id:string) =>{
     const result = await Product.findById(id);
     return result
 }
+const updateById = async(productId:any,updatedProductData:any) =>{
+    const result = await Product.updateOne({_id: productId} , updatedProductData);
+    return result
+}
 const deletedById = async(id:string) =>{
     // console.log(id)
     const result = await Product.findByIdAndDelete(id);
@@ -42,6 +46,7 @@ export const ProductServices ={
     getAllProducts,
     getProductById,
     deletedById,
+    updateById,
     createOrder,
     getAllOrders,
    

@@ -9,6 +9,8 @@ router.post("/products", ProductController.createProduct)
 router.get("/products", ProductController.getAllProducts)
 router.get("/products/:productId", ProductController.getProductById)
 router.delete("/products/:productId", ProductController.deletedById)
+router.put("/products/:productId", ProductController.updateById)
+
 
 // for order purpose only
 router.post("/orders" ,ProductController.createOrder)
