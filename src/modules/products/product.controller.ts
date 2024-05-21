@@ -11,7 +11,16 @@ const createProduct = async (req: Request, res: Response) => {
 };
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await ProductServices.getAllProducts();
+    let result;
+    const { searchTerm } = req.query;
+    if (searchTerm) {
+        
+        result = await ProductServices.getProductBySearch(searchTerm );
+    } else {
+        // Fetch all products if searchTerm parameter doesn't exist
+        result = await ProductServices.getAllProducts();
+    }
+     
     res.json({
       success: true,
       message: "All Products Retrive successfully",

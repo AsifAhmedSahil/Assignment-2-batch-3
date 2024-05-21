@@ -10,6 +10,12 @@ const getAllProducts = async() =>{
     const result = await Product.find();
     return result
 }
+const getProductBySearch = async(searchTerm :any) =>{
+    const result = await Product.find({ name: { $regex: searchTerm, $options: 'i' } });
+    // const result = await Product.find();
+    return result
+}
+
 const getProductById = async(id:string) =>{
     const result = await Product.findById(id);
     return result
@@ -57,6 +63,7 @@ export const ProductServices ={
     updateById,
     createOrder,
     getAllOrders,
-    getAllOrdersByEmail
+    getAllOrdersByEmail,
+    getProductBySearch
    
 }
