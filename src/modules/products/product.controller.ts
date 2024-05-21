@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { ProductServices } from "./product.service";
 
-
 const createProduct = async (req: Request, res: Response) => {
   const result = await ProductServices.createProduct(req.body);
   res.json({
@@ -27,10 +26,9 @@ const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
-
 const getProductById = async (req: Request, res: Response) => {
   try {
-    const {productId} = req.params
+    const { productId } = req.params;
     const result = await ProductServices.getProductById(productId);
     res.json({
       success: true,
@@ -48,9 +46,12 @@ const getProductById = async (req: Request, res: Response) => {
 
 const updateById = async (req: Request, res: Response) => {
   try {
-    const {productId} = req.params
-    const updatedProductData =req.body
-    const result = await ProductServices.updateById(productId,updatedProductData);
+    const { productId } = req.params;
+    const updatedProductData = req.body;
+    const result = await ProductServices.updateById(
+      productId,
+      updatedProductData
+    );
     res.json({
       success: true,
       message: " Products updated successfully",
@@ -67,8 +68,8 @@ const updateById = async (req: Request, res: Response) => {
 
 const deletedById = async (req: Request, res: Response) => {
   try {
-    const {productId} = req.params
-    console.log(productId , "delete")
+    const { productId } = req.params;
+    console.log(productId, "delete");
     const result = await ProductServices.deletedById(productId);
     res.json({
       success: true,
@@ -84,8 +85,6 @@ const deletedById = async (req: Request, res: Response) => {
   }
 };
 
-
-
 // for order purpose use only
 const createOrder = async (req: Request, res: Response) => {
   const result = await ProductServices.createOrder(req.body);
@@ -96,26 +95,33 @@ const createOrder = async (req: Request, res: Response) => {
   });
 };
 const getAllOrders = async (req: Request, res: Response) => {
-    try {
-      const result = await ProductServices.getAllOrders();
-      res.json({
-        success: true,
-        message: "All Orders Retrive successfully",
-        data: result,
-      });
-    } catch (error) {
-      res.json({
-        success: true,
-        message: "Orders is not retrive successfully",
-        error: error,
-      });
+  try {
+    let result;
+    const { email } = req.query;
+
+    // conditions for email query and all order query
+    if (email) {
+      result = await ProductServices.getAllOrdersByEmail(email);
+    } else {
+      result = await ProductServices.getAllOrders();
     }
-    // const { email } = req.query;
-    // console.log(email)
-    // if(email){
-    //     const result = await ProductServices.getOrderByEmail({email});
-    // }
-  };
+
+    res.json({
+      success: true,
+      message: email
+        ? "Orders fetched successfully for user email!"
+        : "All Orders Retrieved Successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      
+      message: "oops , there are no orders",
+      error: error,
+    });
+  }
+};
 
 export const ProductController = {
   createProduct,
@@ -124,5 +130,5 @@ export const ProductController = {
   deletedById,
   updateById,
   createOrder,
-  getAllOrders
+  getAllOrders,
 };

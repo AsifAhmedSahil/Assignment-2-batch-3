@@ -36,6 +36,14 @@ const getAllOrders = async() =>{
     const result = await Order.find();
     return result
 }
+const getAllOrdersByEmail = async(email: any) =>{
+    try {
+        const result = await Order.find({email});
+        return result;
+    } catch (error) {
+        throw new Error("Failed to retrieve all orders");
+    }
+}
 // const getOrderByEmail = async(email:string) =>{
 //     const result = await Order.find({email:email});
 //     return result
@@ -49,5 +57,6 @@ export const ProductServices ={
     updateById,
     createOrder,
     getAllOrders,
+    getAllOrdersByEmail
    
 }
