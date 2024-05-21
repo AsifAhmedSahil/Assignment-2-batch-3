@@ -1,5 +1,5 @@
-import { TProducts } from "./products.interface";
-import { Product } from "./products.model";
+import { TOrders, TProducts } from "./products.interface";
+import { Order, Product } from "./products.model";
 
 
 const createProduct = async(payLoad: TProducts) =>{
@@ -7,6 +7,13 @@ const createProduct = async(payLoad: TProducts) =>{
     return result
 }
 
+// for order purpose only
+const createOrder = async(payLoad: TOrders) =>{
+    const result = await Order.create(payLoad);
+    return result
+}
+
 export const ProductServices ={
-    createProduct
+    createProduct,
+    createOrder
 }

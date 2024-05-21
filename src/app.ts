@@ -4,7 +4,11 @@ const app = express()
 // parser
 app.use(express.json())
 
-app.use("/api/products" ,ProductRoutes)
+// router for products endpoint
+app.use("/api" ,ProductRoutes)
+
+// router for orders endpoint
+// app.use("/api/orders" ,ProductRoutes)
 
 app.get('/', (req:Request, res:Response) => {
   res.send('Hello World')

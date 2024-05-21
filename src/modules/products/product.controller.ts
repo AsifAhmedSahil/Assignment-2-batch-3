@@ -11,6 +11,18 @@ const createProduct = async(req:Request , res:Response) =>{
     })
 }
 
+// for order purpose use only
+const createOrder = async(req:Request , res:Response) =>{
+   
+    const result = await ProductServices.createOrder(req.body)
+    res.json({
+        success: true,
+        message: "Order created successfully",
+        data: result
+    })
+}
+
 export const ProductController = {
-    createProduct
+    createProduct,
+    createOrder
 }

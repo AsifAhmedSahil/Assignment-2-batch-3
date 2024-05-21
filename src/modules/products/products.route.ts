@@ -4,6 +4,10 @@ import { ProductController } from "./product.controller";
 
 const router = express.Router()
 
-router.post("/", ProductController.createProduct)
+// for product purpose only
+router.post("/products", ProductController.createProduct)
+
+// for order purpose only
+router.post("/orders" ,ProductController.createOrder)
 
 export const ProductRoutes = router;
