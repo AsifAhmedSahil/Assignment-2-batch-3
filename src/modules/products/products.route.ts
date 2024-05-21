@@ -1,16 +1,9 @@
-import express, { Request, Response } from "express"
-import { Product } from "./products.model";
+import express from "express"
+import { ProductController } from "./product.controller";
+
 
 const router = express.Router()
 
-router.post("/",async(req:Request , res:Response) =>{
-   
-    const result = await Product.create(req.body);
-    res.json({
-        success: true,
-        message: "Product is added successfully",
-        data: result
-    })
-})
+router.post("/", ProductController.createProduct)
 
 export const ProductRoutes = router;
