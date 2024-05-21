@@ -26,6 +26,25 @@ const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
+
+const getProductById = async (req: Request, res: Response) => {
+  try {
+    const {productId} = req.params
+    const result = await ProductServices.getProductById(productId);
+    res.json({
+      success: true,
+      message: " Products Retrive successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.json({
+      success: true,
+      message: "Product is not retrive successfully",
+      error: error,
+    });
+  }
+};
+
 // for order purpose use only
 const createOrder = async (req: Request, res: Response) => {
   const result = await ProductServices.createOrder(req.body);
@@ -55,6 +74,7 @@ const getAllOrders = async (req: Request, res: Response) => {
 export const ProductController = {
   createProduct,
   getAllProducts,
+  getProductById,
   createOrder,
   getAllOrders
 };

@@ -10,6 +10,10 @@ const getAllProducts = async() =>{
     const result = await Product.find();
     return result
 }
+const getProductById = async(id:string) =>{
+    const result = await Product.findById(id);
+    return result
+}
 
 
 // for order purpose only
@@ -26,6 +30,7 @@ const getAllOrders = async() =>{
 export const ProductServices ={
     createProduct,
     getAllProducts,
+    getProductById,
     createOrder,
     getAllOrders
 }
