@@ -8,6 +8,7 @@ const router = express.Router()
 router.post("/products", ProductController.createProduct)
 router.get("/products", ProductController.getAllProducts)
 router.get("/products/:productId", ProductController.getProductById)
+router.delete("/products/:productId", ProductController.deletedById)
 
 // for order purpose only
 router.post("/orders" ,ProductController.createOrder)

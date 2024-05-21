@@ -14,7 +14,8 @@ export type TProducts = {
     inventory: {
         quantity: number;
         inStock: boolean;
-    };
+    },
+    isDeleted:boolean
 
 }
 

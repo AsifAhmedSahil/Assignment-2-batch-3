@@ -18,6 +18,10 @@ const productSchema = new Schema<TProducts>({
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, required: true },
   },
+  isDeleted: {
+    type: Boolean,
+    default:false
+  }
 });
 
 const orderSchema = new Schema<TOrders>({
