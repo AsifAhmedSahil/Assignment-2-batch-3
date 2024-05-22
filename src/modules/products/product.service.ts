@@ -9,7 +9,7 @@ const getAllProducts = async () => {
   const result = await Product.find();
   return result;
 };
-const getProductBySearch = async (searchTerm: any) => {
+const getProductBySearch = async (searchTerm: string) => {
   const result = await Product.find({
     name: { $regex: searchTerm, $options: "i" },
   });
@@ -22,6 +22,7 @@ const getProductById = async (id: string) => {
   return result;
 };
 const updateById = async (productId: string, updatedProductData: any) => {
+    console.log(updatedProductData)
   const result = await Product.updateOne(
     { _id: productId },
     updatedProductData

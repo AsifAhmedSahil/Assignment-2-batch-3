@@ -32,7 +32,7 @@ const getAllOrders = async (req: Request, res: Response) => {
 
     // conditions for email query and all order query
     if (email) {
-      result = await OrderServices.getAllOrdersByEmail(email);
+      result = await OrderServices.getAllOrdersByEmail(email as string);
     } else {
       result = await OrderServices.getAllOrders();
     }

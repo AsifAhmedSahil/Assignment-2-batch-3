@@ -41,7 +41,7 @@ const getAllOrders = async () => {
   const result = await Order.find();
   return result;
 };
-const getAllOrdersByEmail = async (email: any) => {
+const getAllOrdersByEmail = async (email: string) => {
   try {
     const result = await Order.find({ email });
     return result;

@@ -31,7 +31,7 @@ const getAllProducts = async (req: Request, res: Response) => {
     let result;
     const { searchTerm } = req.query;
     if (searchTerm) {
-      result = await ProductServices.getProductBySearch(searchTerm);
+      result = await ProductServices.getProductBySearch(searchTerm as string);
     } else {
       result = await ProductServices.getAllProducts();
     }
@@ -74,6 +74,7 @@ const updateById = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const updatedProductData = req.body;
+    
     const result = await ProductServices.updateById(
       productId,
       updatedProductData
