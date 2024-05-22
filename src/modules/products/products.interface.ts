@@ -10,14 +10,14 @@ export type TProducts = {
     price: number;
     category: string;
     tags: string[];
-    variants: [TVarient];
+    variants: TVarient[]; // Updated to be an array of TVarient
     inventory: {
         quantity: number;
         inStock: boolean;
     },
-    isDeleted:boolean
-
+    
 }
+
 
 export type TOrders = {
     email: string,

@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import { TOrders, TProducts, TVarient } from "./products.interface";
-import { NOMEM } from "dns";
+
 
 const varientSchema = new Schema<TVarient>({
   type: { type: String, required: true },
@@ -18,10 +18,7 @@ const productSchema = new Schema<TProducts>({
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, required: true },
   },
-  isDeleted: {
-    type: Boolean,
-    default:false
-  }
+  
 });
 
 const orderSchema = new Schema<TOrders>({

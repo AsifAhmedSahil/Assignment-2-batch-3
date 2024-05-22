@@ -1,8 +1,16 @@
-import express, { Request, Response } from "express";
+import  { Request, Response } from "express";
 import { ProductServices } from "./product.service";
+import { Product } from "./products.model";
+import { TOrders } from "./products.interface";
+import { productValidationSchema } from "./product.validation";
+
 
 const createProduct = async (req: Request, res: Response) => {
-  const result = await ProductServices.createProduct(req.body);
+  
+  // validation using zod
+  const zodParsedData = productValidationSchema.parse(req.body)
+
+  const result = await ProductServices.createProduct(zodParsedData);
   res.json({
     success: true,
     message: "Product is added successfully",
@@ -94,15 +102,62 @@ const deletedById = async (req: Request, res: Response) => {
   }
 };
 
+
+
 // for order purpose use only
+
+// create order old
+// const createOrder = async (req: Request, res: Response) => {
+    
+//   try {
+//     const result = await ProductServices.createOrder(req.body);
+//     res.json({
+//       success: true,
+//       message: "Order created successfully",
+//       data: result,
+//     });
+//   } catch (error:any) {
+
+//     res.json({
+//         success: false,
+//         message: error.message
+//       });
+
+//   }
+// };
+
+
+// new try
 const createOrder = async (req: Request, res: Response) => {
-  const result = await ProductServices.createOrder(req.body);
-  res.json({
-    success: true,
-    message: "Order created successfully",
-    data: result,
-  });
+  try {
+    const { email, productId, quantity, price } = req.body;
+
+    // Call the service layer to create the order
+    const result = await ProductServices.createOrder({ email, productId, quantity, price });
+
+    // Return success response with the order details
+    res.json({
+      success: true,
+      message: "Order created successfully",
+      data: result,
+    });
+  } catch (error) {
+    // Handle any errors
+    console.error("Error creating order:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
 };
+
+
+
+
+
+
+
+
 const getAllOrders = async (req: Request, res: Response) => {
   try {
     let result;
