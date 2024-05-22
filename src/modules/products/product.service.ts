@@ -35,15 +35,39 @@ const deletedById = async (id: string) => {
   return result;
 };
 
-
-
-
-
 // for order purpose only
 
 const createOrder = async (payLoad: TOrders) => {
-    
-  const result = await Order.create(payLoad);
+  
+  const { email, productId, quantity, price } = payLoad;
+  
+
+  const existingProduct = await Product.findById(productId);
+
+  if (!existingProduct) {
+    throw new Error("Product not found - insert right productId please");
+  }
+
+  if (existingProduct.inventory.quantity < quantity) {
+    throw new Error("Insufficient quantity available in inventory");
+  }
+
+  //   reduce product quantity after order successfully
+  existingProduct.inventory.quantity -= quantity;
+
+  //   check product is avalable or not
+  existingProduct.inventory.inStock = existingProduct.inventory.quantity > 0;
+
+  // update product information = if order is confirm then reduce the main product quantity
+  await existingProduct.save();
+
+  //   const result = await Order.create(payLoad);
+  const result = await Order.create({
+    email,
+    productId,
+    quantity,
+    price,
+  });
   return result;
 };
 

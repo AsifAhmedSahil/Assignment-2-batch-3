@@ -106,8 +106,11 @@ const deletedById = async (req: Request, res: Response) => {
 
 // for order purpose use only
 const createOrder = async (req: Request, res: Response) => {
-  // validation using zod
+  try {
+    // validation using zod
   const zodParsedData = orderValidationSchema.parse(req.body)
+  console.log("zodparse data",zodParsedData)
+  
 
   const result = await ProductServices.createOrder(zodParsedData);
  
@@ -116,6 +119,13 @@ const createOrder = async (req: Request, res: Response) => {
     message: "order is added successfully",
     data: result,
   });
+  } catch (error :any) {
+    res.json({
+      success: false,
+      message: error.message ||"order is added successfully",
+      
+    });
+  }
 };
 
 const getAllOrders = async (req: Request, res: Response) => {
