@@ -5,11 +5,21 @@ import {
   
   productValidationSchema,
 } from "./product.validation";
+import { Product } from "./products.model";
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     // validation using zod
   const zodParsedData = productValidationSchema.parse(req.body);
+
+  const existingProduct = await Product.findOne({ name: zodParsedData.name });
+
+  if (existingProduct) {
+    return res.status(400).json({
+      success: false,
+      message: "Product already exists",
+    });
+  }
 
   const result = await ProductServices.createProduct(zodParsedData);
   res.json({
@@ -74,7 +84,7 @@ const updateById = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const updatedProductData = req.body;
-    
+
     const result = await ProductServices.updateById(
       productId,
       updatedProductData
