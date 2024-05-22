@@ -111,58 +111,7 @@ const deletedById = async (req: Request, res: Response) => {
   }
 };
 
-// for order purpose use only
-// const createOrder = async (req: Request, res: Response) => {
-//   try {
-//     // validation using zod
-//   const zodParsedData = orderValidationSchema.parse(req.body)
-//   console.log("zodparse data",zodParsedData)
-  
 
-//   const result = await ProductServices.createOrder(zodParsedData);
- 
-//   res.json({
-//     success: true,
-//     message: "order is added successfully",
-//     data: result,
-//   });
-//   } catch (error :any) {
-//     res.json({
-//       success: false,
-//       message: error.message ||"order not found!",
-      
-//     });
-//   }
-// };
-
-// const getAllOrders = async (req: Request, res: Response) => {
-//   try {
-//     let result;
-//     const { email } = req.query;
-
-//     // conditions for email query and all order query
-//     if (email) {
-//       result = await ProductServices.getAllOrdersByEmail(email);
-//     } else {
-//       result = await ProductServices.getAllOrders();
-//     }
-
-//     res.json({
-//       success: true,
-//       message: email
-//         ? "Orders fetched successfully for user email!"
-//         : "Orders fetched successfully!",
-//       data: result,
-//     });
-//   } catch (error) {
-//     res.json({
-//       success: false,
-
-//       message: "oops , there are no orders",
-//       error: error,
-//     });
-//   }
-// };
 
 export const ProductController = {
   createProduct,
@@ -170,6 +119,5 @@ export const ProductController = {
   getProductById,
   deletedById,
   updateById,
-  // createOrder,
-  // getAllOrders,
+  
 };

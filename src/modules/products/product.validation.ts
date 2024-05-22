@@ -1,5 +1,5 @@
-import * as z from 'zod';
-import { TProducts,  TVarient } from './products.interface';
+import * as z from "zod";
+
 
 // Define a Zod schema for the product variant
 const variantSchema = z.object({
@@ -18,14 +18,5 @@ export const productValidationSchema = z.object({
   inventory: z.object({
     quantity: z.number().nonnegative(),
     inStock: z.boolean(),
-  })
- 
+  }),
 });
-
-// Define a Zod schema for the order
-// export const orderValidationSchema = z.object({
-//   email: z.string().email(),
-//   productId: z.string().min(1),
-//   price: z.number().positive(),
-//   quantity: z.number().positive(),
-// });

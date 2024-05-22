@@ -3,30 +3,24 @@ import { Request, Response } from "express";
 import { orderValidationSchema } from "./orders.validation";
 import { OrderServices } from "./orders.services";
 
-
-
-
-
 // for order purpose use only
 const createOrder = async (req: Request, res: Response) => {
   try {
     // validation using zod
-  const zodParsedData = orderValidationSchema.parse(req.body)
-  console.log("zodparse data",zodParsedData)
-  
+    const zodParsedData = orderValidationSchema.parse(req.body);
+    console.log("zodparse data", zodParsedData);
 
-  const result = await OrderServices.createOrder(zodParsedData);
- 
-  res.json({
-    success: true,
-    message: "order is added successfully",
-    data: result,
-  });
-  } catch (error :any) {
+    const result = await OrderServices.createOrder(zodParsedData);
+
+    res.json({
+      success: true,
+      message: "order is added successfully",
+      data: result,
+    });
+  } catch (error: any) {
     res.json({
       success: false,
-      message: error.message ||"order not found!",
-      
+      message: error.message || "order not found!",
     });
   }
 };
@@ -61,7 +55,6 @@ const getAllOrders = async (req: Request, res: Response) => {
 };
 
 export const OrderController = {
-  
   createOrder,
   getAllOrders,
 };

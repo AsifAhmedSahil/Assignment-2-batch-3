@@ -1,16 +1,11 @@
-
 import { Product } from "../products/products.model";
 import { TOrders } from "./orders.interface";
 import { Order } from "./orders.model";
 
-
-
 // for order purpose only
 
 const createOrder = async (payLoad: TOrders) => {
-  
   const { email, productId, quantity, price } = payLoad;
-  
 
   const existingProduct = await Product.findById(productId);
 
@@ -41,6 +36,7 @@ const createOrder = async (payLoad: TOrders) => {
   return result;
 };
 
+
 const getAllOrders = async () => {
   const result = await Order.find();
   return result;
@@ -55,9 +51,7 @@ const getAllOrdersByEmail = async (email: any) => {
 };
 
 export const OrderServices = {
-  
   createOrder,
   getAllOrders,
   getAllOrdersByEmail,
-  
 };
