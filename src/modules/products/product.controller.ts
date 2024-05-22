@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import { ProductServices } from "./product.service";
-// import { Product } from "./products.model";
-// import { TOrders } from "./products.interface";
+
 import {
   orderValidationSchema,
   productValidationSchema,
 } from "./product.validation";
 
 const createProduct = async (req: Request, res: Response) => {
-  // validation using zod
+  try {
+    // validation using zod
   const zodParsedData = productValidationSchema.parse(req.body);
 
   const result = await ProductServices.createProduct(zodParsedData);
@@ -17,6 +17,13 @@ const createProduct = async (req: Request, res: Response) => {
     message: "Product is added successfully",
     data: result,
   });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: "Product is not added successfully",
+      
+    });
+  }
 };
 
 const getAllProducts = async (req: Request, res: Response) => {
@@ -51,13 +58,13 @@ const getProductById = async (req: Request, res: Response) => {
     const result = await ProductServices.getProductById(productId);
     res.json({
       success: true,
-      message: " Products Retrive successfully",
+      message: `productId: ${productId}  Retrive successfully`,
       data: result,
     });
   } catch (error) {
     res.json({
       success: true,
-      message: "Product is not retrive successfully",
+      message: "There are no product ",
       error: error,
     });
   }
@@ -79,7 +86,7 @@ const updateById = async (req: Request, res: Response) => {
   } catch (error) {
     res.json({
       success: false,
-      message: "Product is not updated successfully",
+      message: "Product is not updated ",
       error: error,
     });
   }
@@ -144,7 +151,7 @@ const getAllOrders = async (req: Request, res: Response) => {
       success: true,
       message: email
         ? "Orders fetched successfully for user email!"
-        : "All Orders Retrieved Successfully",
+        : "Orders fetched successfully!",
       data: result,
     });
   } catch (error) {
