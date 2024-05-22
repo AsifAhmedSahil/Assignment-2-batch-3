@@ -122,7 +122,7 @@ const createOrder = async (req: Request, res: Response) => {
   } catch (error :any) {
     res.json({
       success: false,
-      message: error.message ||"order is added successfully",
+      message: error.message ||"order not found!",
       
     });
   }

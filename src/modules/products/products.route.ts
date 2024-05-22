@@ -16,4 +16,12 @@ router.put("/products/:productId", ProductController.updateById)
 router.post("/orders" ,ProductController.createOrder)
 router.get("/orders" ,ProductController.getAllOrders)
 
+// error handling for routes
+router.all("*",(req,res) =>{
+    res.status(404).json({
+        "success": false,
+        "message": "Route not found"
+    })
+})
+
 export const ProductRoutes = router;
