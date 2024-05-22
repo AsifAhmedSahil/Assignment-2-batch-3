@@ -19,9 +19,9 @@ export type TProducts = {
 }
 
 
-export type TOrders = {
-    email: string,
-    productId: string,
-    price: number,
-    quantity: number
-}
+// export type TOrders = {
+//     email: string,
+//     productId: string,
+//     price: number,
+//     quantity: number
+// }

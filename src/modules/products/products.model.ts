@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { TOrders, TProducts, TVarient } from "./products.interface";
+import {  TProducts, TVarient } from "./products.interface";
 
 
 const varientSchema = new Schema<TVarient>({
@@ -21,19 +21,19 @@ const productSchema = new Schema<TProducts>({
   
 });
 
-const orderSchema = new Schema<TOrders>({
-    email:{
-        type: String, required: true
-    },
-    productId: {
-        type: String, required: true
-    },
-    price: {
-        type: Number, required: true
-    },
-    quantity: {
-        type: Number, required: true
-    }
-})
+// const orderSchema = new Schema<TOrders>({
+//     email:{
+//         type: String, required: true
+//     },
+//     productId: {
+//         type: String, required: true
+//     },
+//     price: {
+//         type: Number, required: true
+//     },
+//     quantity: {
+//         type: Number, required: true
+//     }
+// })
 export const Product = model<TProducts>("Product",productSchema)
-export const Order = model<TOrders>("Order",orderSchema)
+// export const Order = model<TOrders>("Order",orderSchema)
