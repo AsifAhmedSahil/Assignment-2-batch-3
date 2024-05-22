@@ -12,7 +12,7 @@ app.use("/api/products" ,ProductRoutes)
 app.use("/api/orders" ,OrderRoutes)
 
 app.get('/', (req:Request, res:Response) => {
-  res.send('Hello World')
+  res.send('Welcome to the backend assignment-2 batch -3')
 })
 
 export default app;

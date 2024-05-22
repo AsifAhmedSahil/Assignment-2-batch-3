@@ -12,10 +12,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const product_service_1 = require("./product.service");
 const product_validation_1 = require("./product.validation");
+const products_model_1 = require("./products.model");
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // validation using zod
         const zodParsedData = product_validation_1.productValidationSchema.parse(req.body);
+        const existingProduct = yield products_model_1.Product.findOne({ name: zodParsedData.name });
+        if (existingProduct) {
+            return res.status(400).json({
+                success: false,
+                message: "Product already exists",
+            });
+        }
         const result = yield product_service_1.ProductServices.createProduct(zodParsedData);
         res.json({
             success: true,

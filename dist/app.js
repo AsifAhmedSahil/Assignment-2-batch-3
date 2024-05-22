@@ -14,6 +14,6 @@ app.use("/api/products", products_route_1.ProductRoutes);
 // router for orders endpoint
 app.use("/api/orders", orders_route_1.OrderRoutes);
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Welcome to the backend assignment-2 batch -3');
 });
 exports.default = app;
